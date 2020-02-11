@@ -1,0 +1,22 @@
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.sticky-top
+  = link_to 'BowWow!', root_path, class: 'navbar-brand'
+  %button.navbar-toggler{ type: "button", 
+                          data: { toggle: "collapse", target: "#navbarSupportedContent" },
+                          aria: { controls: "navbarSupportedContent", expanded: "false", label: "Toggle navigation" } }
+    %span.navbar-toggler-icon
+
+  .collapse.navbar-collapse#navbarSupportedContent
+    %ul.navbar-nav.mr-auto
+      %li.nav-item
+        = header_link_item("ホーム", root_path)
+      %li.nav-item
+        = header_link_item("投稿一覧", root_path)
+      %li.nav-item.dropdown
+        = link_to 'ユーザー', "#", class: "nav-link dropdown-toggle", id: "navbarDropdown", role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }
+        .dropdown-menu{ aria: { labelledby: "navbarDropdown" } }
+          = link_to 'マイページ', "#", class: 'dropdown-item'
+          = link_to 'ログアウト', "#", class: 'dropdown-item'
+
+    %form.form-inline.my-2.my-lg-0
+      %input.form-control.mr-sm-2{ type: "search", placeholder: "Search", aria: { label: "Search" } }
+      %button.btn.btn-outline-success.my-2.my-sm-0{ type: "submit" } Search
