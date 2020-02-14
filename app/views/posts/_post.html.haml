@@ -1,0 +1,12 @@
+.card
+  .card-header
+    %p.text-right
+      = '（公開）' + post.created_at.to_s(:datetime_jp)
+      %br/
+      = '（更新）' + post.updated_at.to_s(:datetime_jp)
+    %h4
+      = post.title
+  .card-body
+    %p.card-text
+      = simple_format(post.body)
+  

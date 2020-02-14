@@ -1,0 +1,8 @@
+= form_for post do |f|
+  .form-group
+    = f.label :title, 'タイトル'
+    = f.text_field :title, class: 'form-control'
+  .form-group
+    = f.label :body, '本文'
+    = f.text_area :body, class: 'form-control', rows: 12
+  = f.submit '保存', class: 'btn btn-primary'
