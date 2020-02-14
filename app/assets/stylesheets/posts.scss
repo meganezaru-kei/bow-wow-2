@@ -21,4 +21,29 @@
   }
 }
 
+.new-post-btn{
+  position: fixed;
+  z-index: 1000;
+  border-radius: 50%;
+  background-color: #ff4444;
+  color: white;
+  text-align: center;
+  bottom: 32px;
+  right: 32px;
+  width: 160px;
+  height: 160px;
+  font-size: 22px;
+  padding-top: 64px;
+}
+.new-post-btn:hover{
+  text-decoration: none;
+  background-color: #aa4444;
+  color: white;
+}
 
+.new-post{
+  min-height: calc(100vh - 192px);
+  &__upper{
+    margin: 30px 0;
+  }
+}

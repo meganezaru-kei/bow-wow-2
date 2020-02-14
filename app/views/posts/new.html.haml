@@ -1,2 +1,14 @@
-%h1 Posts#new
-%p Find me in app/views/posts/new.html.erb
+.container.new-post
+  .d-flex.align-items-center.new-post__upper
+    %h1 新規投稿
+    .ml-auto.boards__linkBox
+      = link_to '投稿一覧', root_path, class: 'btn btn-outline-dark'
+
+  = form_for @post do |f|
+    .form-group
+      = f.label :title, 'タイトル'
+      = f.text_field :title, class: 'form-control'
+    .form-group
+      = f.label :body, '本文'
+      = f.text_area :body, class: 'form-control', rows: 12
+    = f.submit '保存', class: 'btn btn-primary'
