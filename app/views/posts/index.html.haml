@@ -58,6 +58,8 @@
       = link_to "#" do
         = image_tag 'shiba_sample_2.jpg', class: "post-list__items__item__image"
 
+  = paginate @posts
+
 .d-none.d-md-block
   = link_to '新規投稿', new_post_path, class: 'new-post-btn--pc'
 .d-block.d-md-none
