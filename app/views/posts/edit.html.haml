@@ -1,2 +1,7 @@
-%h1 Posts#edit
-%p Find me in app/views/posts/edit.html.erb
+.container.new-post
+  .d-flex.align-items-center.new-post__upper
+    %h1 編集
+    .ml-auto.boards__linkBox
+      = link_to '投稿一覧', root_path, class: 'btn btn-outline-dark'
+
+  = render partial: 'form', locals: { post: @post }

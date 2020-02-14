@@ -1,2 +1,7 @@
-%h1 Posts#show
-%p Find me in app/views/posts/show.html.erb
+.container.show-post
+  .d-flex.align-items-center.mt-4.mb-4
+    .ml-auto.boards__linkBox
+      = link_to '一覧', posts_path,  class: 'btn btn-outline-dark'
+      = link_to '編集', edit_post_path(@post),  class: 'btn btn-outline-dark'
+      
+  = render @post
