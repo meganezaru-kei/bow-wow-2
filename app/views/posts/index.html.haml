@@ -1,6 +1,25 @@
 .container.post-list
   %h1.text-center.font-weight-bold 投稿一覧
   .row.post-list__items
+    %table.table.table-hover.boards__table
+      %thead.thead-dark
+        %tr
+          %th ID
+          %th タイトル
+          %th 作成日時
+          %th 更新日時
+      %tbody
+        - @posts.each do |post|
+          %tr
+            %td
+              = post.id
+            %td
+              = post.title
+            %td
+              = post.created_at.to_s(:datetime_jp)
+            %td
+              = post.updated_at.to_s(:datetime_jp)
+
     -# 以下仮置き
     .col-md-4.post-list__items__item
       = link_to "#" do
