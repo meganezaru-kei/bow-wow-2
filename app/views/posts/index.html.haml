@@ -1,5 +1,8 @@
 .container.post-list
   %h1.text-center.font-weight-bold 投稿一覧
+  - if flash[:notice]
+    .alert.alert-danger
+      = flash[:notice]
   .row.post-list__items
     - @posts.each_with_index do |post, index|
       .col-md-4.post-list__items__item

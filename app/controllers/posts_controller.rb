@@ -11,6 +11,7 @@ class PostsController < ApplicationController
 
   def create
     post = Post.create(post_params)
+    flash[:notice] = "「#{post.title}」を新規投稿しました"
     redirect_to post
   end
 
@@ -29,7 +30,7 @@ class PostsController < ApplicationController
   def destroy
     @post.delete
 
-    redirect_to posts_path
+    redirect_to posts_path, flash: { notice: "「#{@post.title}」を削除しました" }
   end
 
   private
