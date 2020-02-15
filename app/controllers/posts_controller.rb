@@ -23,12 +23,19 @@ class PostsController < ApplicationController
   end
 
   def edit
+    flash[:post] if flash[:post]
   end
 
   def update
-    @post.update(post_params)
-
-    redirect_to @post
+    if @post.update(post_params)
+      flash[:notice] = "「#{@post.title}」を更新しました"
+      redirect_to @post
+    else
+      redirect_back(fallback_location: edit_post_path(@post), flash: {
+        post: @post,
+        error_messages: @post.errors.full_messages
+      })
+    end
   end
 
   def show
