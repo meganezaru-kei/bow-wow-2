@@ -1,4 +1,9 @@
 ja:
+  activerecord:
+    attributes:
+      post:
+        title: タイトル
+        body: 本文
   views:
     pagination:
       first: 最初

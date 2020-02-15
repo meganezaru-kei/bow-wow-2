@@ -6,13 +6,20 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @post = Post.new(flash[:post])
   end
 
   def create
-    post = Post.create(post_params)
-    flash[:notice] = "「#{post.title}」を新規投稿しました"
-    redirect_to post
+    post = Post.new(post_params)
+    if post.save
+      flash[:notice] = "「#{post.title}」を新規投稿しました"
+      redirect_to post
+    else
+      redirect_to new_post_path, flash: {
+        post: post,
+        error_messages: post.errors.full_messages
+      }
+    end
   end
 
   def edit
