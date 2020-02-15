@@ -10,3 +10,4 @@
       = flash[:notice]
 
   = render @post
+  = render partial: 'comment_form', locals: { comment: @comment }
