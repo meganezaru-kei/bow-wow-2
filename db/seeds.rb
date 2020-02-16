@@ -20,3 +20,14 @@ if Rails.env == 'development'
     { name: 'パグ' }
   ])
 end
+
+if Rails.env == 'production'
+  Tag.create([
+    { name: '柴犬' },
+    { name: 'ゴールデンレトリバー' },
+    { name: 'シベリアンハスキー' },
+    { name: 'ビーグル' },
+    { name: 'チワワ' },
+    { name: 'パグ' }
+  ])
+end
