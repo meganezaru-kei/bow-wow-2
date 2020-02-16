@@ -10,4 +10,13 @@ if Rails.env == 'development'
   (1..50).each do |i|
     Post.create(title: "タイトル#{i}", body: "本文#{i}")
   end
+
+  Tag.create([
+    { name: '柴犬' },
+    { name: 'ゴールデンレトリバー' },
+    { name: 'シベリアンハスキー' },
+    { name: 'ビーグル' },
+    { name: 'チワワ' },
+    { name: 'パグ' }
+  ])
 end

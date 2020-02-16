@@ -48,6 +48,7 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
+  gem 'rails-flog', require: 'flog'
 end
 
 group :development do
@@ -58,6 +59,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry-byebug'
+  gem 'annotate'
 end
 
 group :test do
@@ -75,3 +77,5 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'haml-rails'
 gem 'erb2haml'
 gem 'kaminari'
+gem 'rails-i18n'
+gem 'activerecord-session_store'

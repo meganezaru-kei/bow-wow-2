@@ -5,4 +5,14 @@
       = link_to '編集', edit_post_path(@post),  class: 'btn btn-outline-primary'
       = link_to '削除', post_path, class: 'btn btn-outline-danger', method: :delete, data: { confirm: '本当に削除しますか？' }
       
+  - if flash[:notice]
+    .alert.alert-primary
+      = flash[:notice]
+
   = render @post
+
+  = render partial: 'comments/form', locals: { comment: @comment }
+
+  .p-comment__list
+    .p-comment__listTitle コメント
+    = render @post.comments

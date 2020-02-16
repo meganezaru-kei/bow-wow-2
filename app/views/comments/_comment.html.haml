@@ -1,0 +1,8 @@
+.p-comment__item
+  %p
+    = simple_format(comment.comment)
+  .p-comment__bottomLine
+    %span
+      = comment.created_at.to_s(:datetime_jp)
+    %span
+      = link_to '削除', comment, method: :delete, data: { confirm: '削除してもよろしいですか？' }

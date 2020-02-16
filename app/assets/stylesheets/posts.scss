@@ -4,8 +4,21 @@
 
 .post-list{
   max-width: 1000px;
+  min-height: 574px;
   h1 {
     margin: 30px 0;
+  }
+  &__linkBox{
+    a {
+      margin: 0 8px;
+    }
+  }
+  &__searchForm{
+    display: inline-block;
+  }
+  &__select{
+    display: inline-block;
+    width: auto;
   }
   &__items{
     margin-bottom: 20px;
@@ -44,8 +57,8 @@
     background-color: #ff4444;
     color: white;
     text-align: center;
-    bottom: 32px;
-    right: 32px;
+    bottom: 16px;
+    right: 16px;
     width: 80px;
     height: 80px;
     font-size: 14px;

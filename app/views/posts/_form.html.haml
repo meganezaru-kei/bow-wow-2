@@ -1,3 +1,5 @@
+= render 'shared/error_messages'
+
 = form_for post do |f|
   .form-group
     = f.label :title, 'タイトル'
@@ -5,4 +7,11 @@
   .form-group
     = f.label :body, '本文'
     = f.text_area :body, class: 'form-control', rows: 12
+  .form-group
+    %span タグ
+    = f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag|
+      .form-check
+        = tag.label class: 'form-check-label' do
+          = tag.check_box class: 'form-check-input'
+          = tag.text
   = f.submit '保存', class: 'btn btn-primary'
