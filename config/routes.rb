@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   resources :posts
   resources :comments, only: %i[create destroy]
 
-  devise_for :users, :controllers => {
-    :registrations => 'users/registrations',
-    :sessions => 'users/sessions',   
-    :passwords => 'users/passwords'   
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',   
+    passwords: 'users/passwords'   
   } 
   
   devise_scope :user do
