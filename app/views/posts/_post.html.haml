@@ -6,6 +6,9 @@
       = '（更新）' + post.updated_at.to_s(:datetime_jp)
     %h4
       = post.title
+    - post.tags.each do |tag|
+      %span.badge.badge-info
+        = tag.name
   .card-body
     %p.card-text
       = simple_format(post.body)
