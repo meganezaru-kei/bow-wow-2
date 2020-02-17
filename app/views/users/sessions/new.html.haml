@@ -5,11 +5,11 @@
     .form-group
       = f.label :email
       %br/
-      = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', required: 'required'
     .form-group
       = f.label :password
       %br/
-      = f.password_field :password, autocomplete: "current-password", class: 'form-control'
+      = f.password_field :password, autocomplete: "current-password", class: 'form-control', required: 'required'
     - if devise_mapping.rememberable?
       .field
         = f.check_box :remember_me
@@ -20,6 +20,6 @@
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |g|
     = g.hidden_field :email, value: 'test@gmail.com'
     = g.hidden_field :password, value: 'Pass1234'
-    = g.submit "かんたんログイン", class: 'btn btn-danger mb-3'
+    = g.submit "かんたんログイン", class: 'btn btn-warning mb-3'
 
   = render "users/shared/links"
