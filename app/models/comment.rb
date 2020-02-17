@@ -7,6 +7,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  post_id    :bigint
+#  user_id    :integer
 #
 # Indexes
 #
@@ -19,6 +20,7 @@
 
 class Comment < ApplicationRecord
   belongs_to :post
+  belongs_to :user
 
   validates :comment, presence: true, length: { maximum: 1000 }
 end

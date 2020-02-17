@@ -3,28 +3,24 @@ class PostsController < ApplicationController
   
   def index
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
-    @posts = @posts.page(params[:page])
+    @posts = @posts.order(created_at: :desc).page(params[:page])
   end
 
   def new
-    @post = Post.new(flash[:post])
+    @post = Post.new
   end
 
   def create
-    post = Post.new(post_params)
-    if post.save
-      flash[:notice] = "「#{post.title}」を新規投稿しました"
-      redirect_to post
+    @post = Post.new(post_params)
+    if @post.save
+      flash[:notice] = "「#{@post.title}」を新規投稿しました"
+      redirect_to @post
     else
-      redirect_to new_post_path, flash: {
-        post: post,
-        error_messages: post.errors.full_messages
-      }
+      render :new
     end
   end
 
   def edit
-    flash[:post] if flash[:post]
   end
 
   def update
@@ -32,10 +28,7 @@ class PostsController < ApplicationController
       flash[:notice] = "「#{@post.title}」を更新しました"
       redirect_to @post
     else
-      redirect_back(fallback_location: edit_post_path(@post), flash: {
-        post: @post,
-        error_messages: @post.errors.full_messages
-      })
+      render :edit
     end
   end
 
@@ -46,13 +39,13 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
 
-    redirect_to posts_path, flash: { notice: "「#{@post.title}」を削除しました" }
+    redirect_to posts_path, flash: { alert: "「#{@post.title}」を削除しました" }
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, tag_ids: [])
+    params.require(:post).permit(:title, :body, tag_ids: []).merge(user_id: current_user.id)
   end
 
   def set_target_post

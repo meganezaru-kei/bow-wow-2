@@ -7,6 +7,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  post_id    :bigint
+#  user_id    :integer
 #
 # Indexes
 #

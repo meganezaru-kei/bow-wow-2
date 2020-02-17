@@ -7,15 +7,23 @@
 
   .collapse.navbar-collapse#navbarSupportedContent
     %ul.navbar-nav.mr-auto
-      %li.nav-item
-        = header_link_item("新規投稿", new_post_path)
-      %li.nav-item
-        = header_link_item("投稿一覧", root_path)
-      %li.nav-item.dropdown
-        = link_to 'ユーザー', "#", class: "nav-link dropdown-toggle", id: "navbarDropdown", role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }
-        .dropdown-menu{ aria: { labelledby: "navbarDropdown" } }
-          = link_to 'マイページ', "#", class: 'dropdown-item'
-          = link_to 'ログアウト', "#", class: 'dropdown-item'
+      - if user_signed_in?
+        %li.nav-item
+          = header_link_item("投稿一覧", root_path)
+        %li.nav-item
+          = header_link_item("新規投稿", new_post_path)
+        %li.nav-item.dropdown
+          = link_to "#{current_user.name}さん", "#", class: "nav-link dropdown-toggle", id: "navbarDropdown", role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }
+          .dropdown-menu{ aria: { labelledby: "navbarDropdown" } }
+            = link_to 'マイページ', "#", class: 'dropdown-item'
+            = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+      - else
+        %li.nav-item
+          = header_link_item("投稿一覧", root_path)
+        %li.nav-item
+          = header_link_item("ユーザ登録", new_user_registration_path)
+        %li.nav-item
+          = header_link_item("ログイン", new_user_session_path)
 
     %form.form-inline.my-2.my-lg-0
       %input.form-control.mr-sm-2{ type: "search", placeholder: "Search", aria: { label: "Search" } }

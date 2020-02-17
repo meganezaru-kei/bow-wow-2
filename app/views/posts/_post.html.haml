@@ -4,6 +4,8 @@
       = '（公開）' + post.created_at.to_s(:datetime_jp)
       %br/
       = '（更新）' + post.updated_at.to_s(:datetime_jp)
+      %br/
+      = '（投稿者）' + post.user.name
     %h4
       = post.title
     - post.tags.each do |tag|

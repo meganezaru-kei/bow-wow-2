@@ -1,0 +1,24 @@
+.container.user-form
+  %h2.mb-4 新規ユーザ登録
+  = render 'layouts/flashes'
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    .form-group
+      = f.label :name, 'ニックネーム（8文字以内）'
+      %br/
+      = f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control', required: 'required', maxlength: "8"
+    .form-group
+      = f.label :email
+      %br/
+      = f.email_field :email, autocomplete: "email", class: 'form-control', required: 'required'
+    .form-group
+      = f.label :password, 'パスワード（8文字以上）'
+      %br/
+      = f.password_field :password, autocomplete: "new-password", class: 'form-control', required: 'required', minlength: "8"
+    .form-group
+      = f.label :password_confirmation
+      %br/
+      = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', required: 'required'
+    .actions
+      = f.submit "新規登録", class: 'btn btn-primary mb-3'
+  = render "users/shared/links"

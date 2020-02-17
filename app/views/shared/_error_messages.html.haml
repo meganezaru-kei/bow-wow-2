@@ -1,6 +1,6 @@
-- if flash[:error_messages]
+- if @post.errors.any?
   .alert.alert-danger
     %ul
-      - flash[:error_messages].each do |msg|
+      - @post.errors.full_messages.each do |msg|
         %li
           = msg

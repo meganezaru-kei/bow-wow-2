@@ -1,0 +1,25 @@
+.container.user-form
+  %h2.mb-4 ログイン
+  = render 'layouts/flashes'
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .form-group
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', required: 'required'
+    .form-group
+      = f.label :password
+      %br/
+      = f.password_field :password, autocomplete: "current-password", class: 'form-control', required: 'required'
+    - if devise_mapping.rememberable?
+      .field
+        = f.check_box :remember_me
+        = f.label :remember_me, class: 'mb-3'
+    .actions
+      = f.submit "ログイン", class: 'btn btn-primary mb-3'
+
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |g|
+    = g.hidden_field :email, value: 'test@gmail.com'
+    = g.hidden_field :password, value: 'Pass1234'
+    = g.submit "かんたんログイン", class: 'btn btn-warning mb-3'
+
+  = render "users/shared/links"

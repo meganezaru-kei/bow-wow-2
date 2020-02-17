@@ -1,0 +1,11 @@
+.container.user-form
+  %h2 パスワードをお忘れの方
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    .form-group
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+    .actions
+      = f.submit "パスワード再設定メールを送る", class: 'btn btn-primary mb-3'
+  = render "users/shared/links"
