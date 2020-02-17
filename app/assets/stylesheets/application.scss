@@ -15,15 +15,16 @@
 @import "posts";
 @import "footer";
 @import "comments";
+@import "users";
 
 body{
   background-color: #efefef;
 }
 
 nav{
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .container{
-  min-height: calc(100vh - 182px);
+  min-height: calc(100vh - 192px);
 }
