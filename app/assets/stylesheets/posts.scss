@@ -87,4 +87,16 @@
 
 .show-post{
   min-height: calc(100vh - 186px);
+  &__info{
+    font-size: 14px;
+    color: #666;
+  }
+  &__images{
+    width: 70%;
+    height: 369px;
+    object-fit: cover;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  }
 }
