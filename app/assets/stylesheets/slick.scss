@@ -103,18 +103,23 @@
     position: relative;
     .arrow-left{
         position: absolute;
-        top: 140px;
-        left: 10px;
+        top: 160px;
+        left: 45px;
     }
     .arrow-right{
         position: absolute;
-        top: 140px;
-        right: 10px;
+        top: 160px;
+        right: 45px;
     }
     .slick-arrow{
-        font-size: 62px;
-        background-color: #efefef;
+        font-size: 90px;
+        background-color: rgba(239,239,239,0.6);
         border-radius: 50%;
-        padding: 0 16px;
+        padding: 0 24px;
+        z-index: 1000;
+        cursor: pointer;
+    }
+    .slick-arrow:hover{
+        background-color: rgba(222,222,222,0.6);
     }
 }
