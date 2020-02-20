@@ -1,16 +1,29 @@
 .card
   .card-header
-    %p.text-right
-      = '（公開）' + post.created_at.to_s(:datetime_jp)
-      %br/
-      = '（更新）' + post.updated_at.to_s(:datetime_jp)
-      %br/
-      = '（投稿者）' + post.user.name
+    %p.show-post__info
+      %span
+        = icon("far", "edit")
+        = post.created_at.to_s(:datetime_day_jp)
+      &nbsp
+      %span
+        = icon("fas", "user")
+        = post.user.name + "さん"
     %h4
       = post.title
     - post.tags.each do |tag|
       %span.badge.badge-info
         = tag.name
+  .card-body
+    %ul.slider-pc.d-none.d-md-block
+      - if post.images.attached?
+        - post.images.each do |image|
+          %li
+            = image_tag image, class: 'show-post__images--pc'
+    %ul.slider-sp.d-block.d-md-none
+      - if post.images.attached?
+        - post.images.each do |image|
+          %li
+            = image_tag image, class: 'show-post__images--sp'
   .card-body
     %p.card-text
       = simple_format(post.body)

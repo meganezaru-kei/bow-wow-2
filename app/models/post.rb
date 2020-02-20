@@ -18,4 +18,7 @@ class Post < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 30 }
   validates :body, presence: true, length: { maximum: 1000 }
+
+  has_many_attached :images
+  validates :images, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..5.megabytes }
 end

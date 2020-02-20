@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @images_count = @post.images.length.to_i
   end
 
   def create
@@ -16,18 +17,24 @@ class PostsController < ApplicationController
       flash[:notice] = "「#{@post.title}」を新規投稿しました"
       redirect_to @post
     else
+      @images_count = @post.images.length.to_i
       render :new
     end
   end
 
   def edit
+    @images_count = @post.images.length.to_i
   end
 
   def update
     if @post.update(post_params)
+      if params[:post][:images_blob_ids]
+        delete_images
+      end
       flash[:notice] = "「#{@post.title}」を更新しました"
       redirect_to @post
     else
+      @images_count = @post.images.length.to_i
       render :edit
     end
   end
@@ -45,10 +52,17 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, tag_ids: []).merge(user_id: current_user.id)
+    params.require(:post).permit(:title, :body, tag_ids: [], images: []).merge(user_id: current_user.id)
   end
 
   def set_target_post
     @post = Post.find(params[:id])
+  end
+
+  def delete_images
+    params[:post][:images_blob_ids].each do |image_id|
+      image = @post.images.find(image_id)
+      image.purge
+    end
   end
 end
