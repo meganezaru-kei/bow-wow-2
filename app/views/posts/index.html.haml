@@ -12,7 +12,7 @@
             - post.images.first(1).each do |image|
               = image_tag image, class: 'post-list__items__item__image'
           - else
-            = image_tag 'shiba_sample.jpg', class: "post-list__items__item__image"
+            = image_tag 'no_image.png', class: "post-list__items__item__image"
           .post-list__items__item__text
             = post.title
 

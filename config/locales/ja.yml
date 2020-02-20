@@ -4,6 +4,7 @@ ja:
       post:
         title: タイトル
         body: 本文
+        images: 画像
       comment:
         comment: コメント
   views:

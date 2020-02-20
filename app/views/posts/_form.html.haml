@@ -1,16 +1,25 @@
 = render 'shared/error_messages'
 
 = form_for post do |f|
+  .form-group#post-images-area
+    = f.label :images, '画像（1枚〜6枚まで）：'
+    = f.file_field :images, multiple: true, class: 'image-upload-btn', id: "post_images_#{@images_count + 1}"
+  .form-group.image-boxes
+    - post.images.each_with_index do |image, index|
+      .image-box.m-3.float-left{ id: "image-box-#{index + 1}" }
+        = image_tag image, class: "mb-1 image-box__image"
+        .delete-btn{ id: "delete-btn-#{index + 1}" }= icon('far', 'times-circle')
+      .delete-check-boxes
+        = f.check_box :images_blob_ids, { multiple: true, checked: false, class: "check-box-#{index + 1}" }, image.id, false
+    = f.label :images, "+", class: "add_image text-center m-3 float-left", id: "have_#{@images_count}_img", for: "post_images_#{@images_count + 1}"
   .form-group
-    = f.file_field :images, multiple: true
-  .form-group
-    = f.label :title, 'タイトル'
+    = f.label :title, 'タイトル（30文字以内）：'
     = f.text_field :title, class: 'form-control'
   .form-group
-    = f.label :body, '本文'
+    = f.label :body, '本文（1000文字以内）：'
     = f.text_area :body, class: 'form-control', rows: 12
   .form-group
-    %span タグ
+    %span タグ：
     = f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag|
       .form-check
         = tag.label class: 'form-check-label' do

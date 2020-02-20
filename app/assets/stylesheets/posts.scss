@@ -100,11 +100,55 @@
     box-shadow: 0 3px 6px rgba(0,0,0,0.15);
   }
   &__images--sp{
-    width: 100%;
+    width: 98%;
     height: 260px;
     object-fit: cover;
     margin: 0 auto;
     border-radius: 10px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  }
+}
+
+.image-upload-btn{
+  display: none;
+}
+
+.image-boxes{
+  display: flow-root;
+  .add_image{
+    font-size: 60px;
+    border: black 4px dashed;
+    width: 120px;
+    height: 120px;
+    line-height: 105px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  #have_6_img{
+    display: none;
+  }
+  .image-box{
+    position: relative;
+    .delete-btn{
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      i{
+        font-size: 22px;
+        cursor: pointer;
+      }
+      i:hover{
+        font-weight: bold;
+      }
+    }
+    &__image{
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+  .delete-check-boxes{
+    display: none;
   }
 }
