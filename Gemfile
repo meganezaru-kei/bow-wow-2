@@ -83,3 +83,4 @@ gem 'devise'
 gem 'font-awesome-sass'
 gem 'jquery-rails'
 gem 'activestorage-validator'
+gem "aws-sdk-s3", require: false
