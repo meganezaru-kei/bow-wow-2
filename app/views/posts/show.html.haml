@@ -1,19 +1,25 @@
 .container.show-post
-  .d-flex.align-items-center.mt-4.mb-4
-    .ml-auto.boards__linkBox
-      = link_to '戻る', posts_path,  class: 'btn btn-outline-dark'
-      - if user_signed_in? && current_user.id == @post.user.id
-        = link_to '編集', edit_post_path(@post),  class: 'btn btn-outline-primary'
-        = link_to '削除', post_path, class: 'btn btn-outline-danger', method: :delete, data: { confirm: '本当に削除しますか？' }
-      
   - if flash[:notice]
     .alert.alert-primary
       = flash[:notice]
+  .row
+    .col-md-8
+      = render @post
 
-  = render @post
+      - if user_signed_in?
+        = render partial: 'comments/form', locals: { comment: @comment }
+      .p-comment__list
+        .p-comment__listTitle コメント
+        = render @post.comments
 
-  - if user_signed_in?
-    = render partial: 'comments/form', locals: { comment: @comment }
-  .p-comment__list
-    .p-comment__listTitle コメント
-    = render @post.comments
+    .col-md-4
+      .card
+        .card-header
+          %h6
+            = @post.user.name + "さんのその他の投稿"
+        .card-body
+          .post-list__items
+            - if @user_posts.length == 0
+              %p まだその他の投稿はありません
+            - else
+              = render partial: 'shared/side_column', locals: { posts: @user_posts }

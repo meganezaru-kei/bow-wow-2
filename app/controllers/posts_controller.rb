@@ -41,6 +41,7 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new(post_id: @post.id)
+    @user_posts = Post.order(created_at: :desc).where(user_id: @post.user.id).where.not(id: @post.id).limit(6)
   end
 
   def destroy
