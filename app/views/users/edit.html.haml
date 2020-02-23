@@ -1,0 +1,23 @@
+.container.user-form
+  .d-flex.align-items-center.new-post__upper
+    %h2 プロフィール編集
+    .ml-auto.boards__linkBox
+      = link_to '戻る', user_path(current_user), class: 'btn btn-outline-dark'
+
+  = form_for @user do |f|
+    .form-group
+      = f.label :image, '画像：'
+      = f.file_field :image
+      .profile
+        .profile-image
+          - if @user.image.attached?
+            = f.label :image, class: "preview" do
+              = image_tag @user.image, class: "profile-image__image edit"
+          - else
+            = f.label :image, class: "preview" do
+              = image_tag 'no_image.png', class: "profile-image__image edit"
+    .form-group
+      = f.label :name, 'ニックネーム（8文字以内）：'
+      = f.text_field :name, class: 'form-control', maxlength: "8"
+    = f.submit '保存', class: "btn btn-primary"
+
