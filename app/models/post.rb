@@ -16,7 +16,7 @@ class Post < ApplicationRecord
   has_many :tags, through: :post_tag_relations 
   belongs_to :user
 
-  validates :title, presence: true, length: { maximum: 30 }
+  validates :title, presence: true, length: { maximum: 50 }
   validates :body, presence: true, length: { maximum: 1000 }
 
   has_many_attached :images
