@@ -15,15 +15,15 @@
         %li.nav-item.pl-1.dropdown
           = link_to icon('fas', 'user') + " #{current_user.name}さん", "#", class: "nav-link dropdown-toggle", id: "navbarDropdown", role: "button", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" }
           .dropdown-menu{ aria: { labelledby: "navbarDropdown" } }
-            = link_to 'マイページ', "#", class: 'dropdown-item'
-            = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+            = link_to 'マイページ', user_path(current_user), class: 'dropdown-item'
+            = link_to 'ログアウト', logout_path, class: 'dropdown-item'
       - else
         %li.nav-item.pl-1
           = header_link_item(icon('fas', 'th') + " 投稿一覧", root_path)
         %li.nav-item.pl-1
-          = header_link_item(icon('fas', 'user-plus') + " ユーザ登録", new_user_registration_path)
+          = header_link_item(icon('fas', 'user-plus') + " ユーザ登録", signup_path)
         %li.nav-item.pl-1
-          = header_link_item(icon('fas', 'sign-in-alt') + " ログイン", new_user_session_path)
+          = header_link_item(icon('fas', 'sign-in-alt') + " ログイン", login_path)
 
     %form.form-inline.my-2.my-lg-0
       %input.form-control.mr-sm-2{ type: "search", placeholder: "Search", aria: { label: "Search" } }
