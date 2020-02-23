@@ -5,8 +5,9 @@
         = icon("far", "edit")
         = post.created_at.to_s(:datetime_day_jp)
       %li.list-inline-item
-        = icon("fas", "user")
-        = post.user.name + "さん"
+        = link_to user_path(post.user.id) do
+          = icon("fas", "user")
+          = post.user.name + "さん"
       - if user_signed_in? && current_user.id == post.user.id
         %li.list-inline-item.float-right.dropdown
           %span{ role: "button", id: "dropdownMenu", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "true" } }= icon("fas", "ellipsis-h")
