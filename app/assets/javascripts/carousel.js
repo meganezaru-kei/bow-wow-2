@@ -7,7 +7,7 @@ $(document).on('turbolinks:load', function(){
     autoplaySpeed: 4000,
     speed: 800,
     centerMode: true,
-    centerPadding: '15%'
+    centerPadding: '10%'
   });
 });
 $(document).on('turbolinks:load', function(){

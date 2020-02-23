@@ -103,19 +103,19 @@
     position: relative;
     .arrow-left{
         position: absolute;
-        top: 160px;
-        left: 45px;
+        top: 175px;
+        left: 0px;
     }
     .arrow-right{
         position: absolute;
-        top: 160px;
-        right: 45px;
+        top: 175px;
+        right: 0px;
     }
     .slick-arrow{
-        font-size: 90px;
-        background-color: rgba(239,239,239,0.6);
+        font-size: 50px;
+        background-color: rgba(239,239,239,0.7);
         border-radius: 50%;
-        padding: 0 24px;
+        padding: 0 14px;
         z-index: 1000;
         cursor: pointer;
     }
