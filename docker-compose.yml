@@ -24,10 +24,6 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_DATABASE: app_test
       MYSQL_ROOT_PASSWORD: password
-  production-db:
-    image: mysql:5.7
-    volumes:
-      - ./tmp/db:/var/lib/mysql/data
   test-db:
     image: mysql:5.7
     environment:
