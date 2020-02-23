@@ -2,7 +2,7 @@
   %p
     = simple_format(comment.comment)
   .p-comment__bottomLine
-    - if current_user.id == comment.user.id
+    - if user_signed_in? && current_user.id == comment.user.id
       %span
         = link_to '削除', comment, method: :delete, data: { confirm: 'コメントを削除してもよろしいですか？' }
     - if comment.post.user.id == comment.user.id
