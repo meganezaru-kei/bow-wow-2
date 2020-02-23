@@ -13,7 +13,7 @@
         = f.check_box :images_blob_ids, { multiple: true, checked: false, class: "check-box-#{index + 1}" }, image.id, false
     = f.label :images, "+", class: "add_image text-center m-3 float-left", id: "have_#{@images_count}_img", for: "post_images_#{@images_count + 1}"
   .form-group
-    = f.label :title, 'タイトル（30文字以内）：'
+    = f.label :title, 'タイトル（50文字以内）：'
     = f.text_field :title, class: 'form-control'
   .form-group
     = f.label :body, '本文（1000文字以内）：'

@@ -1,3 +1,28 @@
 .user-form{
   max-width: 390px;
 }
+
+#user_image{
+  display: none;
+}
+
+.profile{
+  span{
+    font-size: 18px;
+  }
+  .profile-image{
+    text-align: center;
+    label{
+      border-radius: 50%;
+    }
+    &__image{
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    &__image.edit{
+      cursor: pointer;
+    }
+  }
+}

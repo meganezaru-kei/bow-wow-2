@@ -20,6 +20,12 @@
         .card-body
           .post-list__items
             - if @user_posts.length == 0
-              %p まだその他の投稿はありません
+              %p その他の投稿はありません
             - else
               = render partial: 'shared/side_column', locals: { posts: @user_posts }
+      .card.mt-4
+        .card-header
+          %h6 新着
+        .card-body
+          .post-list__items
+            = render partial: 'shared/side_column', locals: { posts: @new_posts }

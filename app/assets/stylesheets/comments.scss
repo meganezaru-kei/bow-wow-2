@@ -25,12 +25,33 @@
   border-bottom: 2px dotted #dfdfdf;
 }
 
-.p-comment__bottomLine {
-  font-size: 15px;
-  text-align: right;
-
-  > span {
-    font-size: 14px;
-    margin: 0 12px;
+.p-comment__userInfo{
+  img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
   }
+  &__upperLine{
+    font-size: 15px;
+    color: #666;
+  
+    > li {
+      font-size: 14px;
+      margin: 0 4px;
+    }
+
+    i{
+      font-size: 16px;
+      color: #666;
+    }
+    i:hover{
+      font-weight: bold;
+    }
+  }
+}
+
+.p-comment__text{
+  padding-left: 64px;
+  margin-top: -8px;
 }
