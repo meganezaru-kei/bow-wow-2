@@ -1,13 +1,18 @@
 .card
   .card-header
-    %p.show-post__info
-      %span
+    %ul.show-post__info.list-inline
+      %li.list-inline-item
         = icon("far", "edit")
         = post.created_at.to_s(:datetime_day_jp)
-      &nbsp
-      %span
+      %li.list-inline-item
         = icon("fas", "user")
         = post.user.name + "さん"
+      - if user_signed_in? && current_user.id == post.user.id
+        %li.list-inline-item.float-right.dropdown
+          %span{ role: "button", id: "dropdownMenu", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "true" } }= icon("fas", "ellipsis-h")
+          .dropdown-menu.dropdown-menu-right{ aria: { labelledby: "dropdownMenu" } }
+            = link_to '編集する', edit_post_path(post), class: 'dropdown-item'
+            = link_to '削除する', post_path, class: 'dropdown-item text-danger', method: :delete, data: { confirm: '本当に削除しますか？' }
     %h4
       = post.title
     - post.tags.each do |tag|

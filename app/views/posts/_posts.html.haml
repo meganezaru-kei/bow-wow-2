@@ -1,0 +1,10 @@
+- posts.each do |post|
+  .col-md-4.post-list__items__item
+    = link_to post do
+      - if post.images.attached?
+        - post.images.first(1).each do |image|
+          = image_tag image, class: 'post-list__items__item__image'
+      - else
+        = image_tag 'no_image.png', class: "post-list__items__item__image"
+      .post-list__items__item__text
+        = post.title

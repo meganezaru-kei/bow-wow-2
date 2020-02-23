@@ -61,19 +61,19 @@
     right: 16px;
     width: 80px;
     height: 80px;
-    font-size: 14px;
-    padding-top: 32px;
+    font-size: 38px;
+    padding-top: 12px;
   }
 }
 .new-post-btn{
   &--pc:hover{
     text-decoration: none;
-    background-color: #aa4444;
+    background-color: #ff7777;
     color: white;
   }
   &--sp:hover{
     text-decoration: none;
-    background-color: #aa4444;
+    background-color: #ff7777;
     color: white;
   }
 }
@@ -93,7 +93,7 @@
   }
   &__images--pc{
     width: 95%;
-    height: 430px;
+    height: 400px;
     object-fit: cover;
     margin: 0 auto;
     border-radius: 10px;

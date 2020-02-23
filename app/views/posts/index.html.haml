@@ -1,25 +1,16 @@
 .container.post-list
-  %h1.text-center.font-weight-bold 投稿一覧
+  %h1.text-center.font-weight-bold みんなの投稿
   = render 'layouts/flashes'
   .ml-auto.post-list__linkBox.text-right
     = form_tag posts_path, method: :get, class: 'post-list__searchForm' do
       = select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]), { prompt: 'タグで絞り込み', class: 'form-control post-list__select', onchange: 'submit(this.form);' }
   .row.post-list__items
-    - @posts.each_with_index do |post, index|
-      .col-md-4.post-list__items__item
-        = link_to post do
-          - if post.images.attached?
-            - post.images.first(1).each do |image|
-              = image_tag image, class: 'post-list__items__item__image'
-          - else
-            = image_tag 'no_image.png', class: "post-list__items__item__image"
-          .post-list__items__item__text
-            = post.title
+    = render partial: 'posts', locals: { posts: @posts }
 
   = paginate @posts
 
 - if user_signed_in?
   .d-none.d-md-block
-    = link_to '新規投稿', new_post_path, class: 'new-post-btn--pc'
+    = link_to icon("fas", "plus-circle") + ' 新規投稿', new_post_path, class: 'new-post-btn--pc'
   .d-block.d-md-none
-    = link_to '新規投稿', new_post_path, class: 'new-post-btn--sp'
+    = link_to icon("fas", "plus"), new_post_path, class: 'new-post-btn--sp'

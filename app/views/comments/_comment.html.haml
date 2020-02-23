@@ -4,7 +4,7 @@
   .p-comment__bottomLine
     - if current_user.id == comment.user.id
       %span
-        = link_to '削除', comment, method: :delete, data: { confirm: '削除してもよろしいですか？' }
+        = link_to '削除', comment, method: :delete, data: { confirm: 'コメントを削除してもよろしいですか？' }
     - if comment.post.user.id == comment.user.id
       %span.badge.badge-secondary
         = comment.user.name
@@ -12,4 +12,4 @@
       %span
         = comment.user.name
     %span
-      = comment.created_at.to_s(:datetime_jp)
+      = comment.created_at.to_s(:datetime_day_jp)
