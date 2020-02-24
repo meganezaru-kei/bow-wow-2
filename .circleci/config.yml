@@ -1,70 +1,15 @@
-version: 2
+version: 2.1
+orbs:
+  ruby: circleci/ruby@0.1.2 
+
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/ruby:2.5.1-node-browsers
-        environment:
-          RAILS_ENV: test
-          MYSQL_HOST: 127.0.0.1
-          MYSQL_USERNAME: 'root'
-          MYSQL_PASSWORD: ''
-          MYSQL_PORT: 4306
-      - image: circleci/mysql:5.7
-        environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_USER: 'root'
-          MYSQL_PASSWORD: ''
-          MYSQL_ROOT_PASSWORD: 'password'
-          MYSQL_DATABASE: 'app_test'
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
-    working_directory: ~/docker-rails
-
+      - image: circleci/ruby:2.6.3-stretch-node
+    executor: default
     steps:
       - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
       - run:
-          name: install dependencies
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
-      # Database setup
-      - run:
-          name: waiting for stating database
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 1m
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
-
-      # run tests!
-      - run:
-          name: Run rspec in parallel
-          command: |
-            bundle exec rspec --profile 10 \
-                              --format RspecJunitFormatter \
-                              --out test_results/rspec.xml \
-                              --format progress \
-                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-
-      # collect reports
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+          name: Which bundler?
+          command: bundle -v
+      - ruby/bundle-install
