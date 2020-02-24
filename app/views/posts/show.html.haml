@@ -16,7 +16,9 @@
       .card
         .card-header
           %h6
-            = @post.user.name + "さんのその他の投稿"
+            = link_to user_path(@post.user.id) do
+              = @post.user.name + "さん"
+            = "のその他の投稿"
         .card-body
           .post-list__items
             - if @user_posts.length == 0
@@ -25,7 +27,7 @@
               = render partial: 'shared/side_column', locals: { posts: @user_posts }
       .card.mt-4
         .card-header
-          %h6 新着
+          %h6 新着投稿
         .card-body
           .post-list__items
             = render partial: 'shared/side_column', locals: { posts: @new_posts }

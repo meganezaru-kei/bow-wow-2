@@ -3,16 +3,20 @@
     .p-comment__userInfo
       .p-comment__userInfo__image.mr-2.float-left
         - if comment.user.image.attached?
-          = image_tag comment.user.image
+          = link_to user_path(comment.user.id) do
+            = image_tag comment.user.image
         - else
-          = image_tag "no_image.png"
+          = link_to user_path(comment.user.id) do
+            = image_tag "no_image.png"
       %ul.list-inline.p-comment__userInfo__upperLine
         - if comment.post.user.id == comment.user.id
           %li.list-inline-item.badge.badge-secondary
-            = comment.user.name
+            = link_to user_path(comment.user.id), class: "text-white" do
+              = comment.user.name
         - else
           %li.list-inline-item
-            = comment.user.name
+            = link_to user_path(comment.user.id) do
+              = comment.user.name
         %li.list-inline-item
           = comment.created_at.to_s(:datetime_day_jp)
         - if user_signed_in? && current_user.id == comment.user.id
