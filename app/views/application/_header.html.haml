@@ -25,6 +25,11 @@
         %li.nav-item.pl-1
           = header_link_item(icon('fas', 'sign-in-alt') + " ログイン", login_path)
 
-    %form.form-inline.my-2.my-lg-0
-      %input.form-control.mr-sm-2{ type: "search", placeholder: "Search", aria: { label: "Search" } }
-      %button.btn.btn-outline-success.my-2.my-sm-0{ type: "submit" } Search
+    = search_form_for(@q, url: search_path, class: "form-inline my-2 my-lg-0") do |f|
+      = f.search_field :title_cont, class:"form-control mr-sm-2", type: "search", placeholder: "Search", area: { label: "Search" }
+      = f.submit 'Search', class: "btn btn-outline-success my-2 my-sm-0", type: "submit"
+
+
+    -# %form.form-inline.my-2.my-lg-0
+    -#   %input.form-control.mr-sm-2{ type: "search", placeholder: "Search", aria: { label: "Search" } }
+    -#   %button.btn.btn-outline-success.my-2.my-sm-0{ type: "submit" } Search
