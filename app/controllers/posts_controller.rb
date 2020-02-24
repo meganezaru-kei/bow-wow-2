@@ -2,7 +2,6 @@ class PostsController < ApplicationController
   before_action :set_target_post, only: %i[show edit update destroy]
   
   def index
-    @q = Post.ransack(params[:q])
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
     @posts = @posts.with_attached_images.order(created_at: :desc).page(params[:page])
   end
@@ -47,8 +46,9 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new(post_id: @post.id)
-    @user_posts = Post.order(created_at: :desc).where(user_id: @post.user.id).where.not(id: @post.id).limit(3)
-    @new_posts = Post.order(created_at: :desc).where.not(id: @post.id, user_id: @post.user.id).limit(3)
+    @comments = @post.comments.includes(:user)
+    @user_posts = Post.with_attached_images.order(created_at: :desc).where(user_id: @post.user.id).where.not(id: @post.id).limit(3)
+    @new_posts = Post.with_attached_images.order(created_at: :desc).where.not(id: @post.id, user_id: @post.user.id).limit(3)
   end
 
   def destroy
@@ -77,4 +77,5 @@ class PostsController < ApplicationController
   def search_params
     params.require(:q).permit(:title_cont)
   end
+
 end
