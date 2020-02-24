@@ -1,22 +1,23 @@
-.p-comment__item
-  .p-comment__userInfo
-    .p-comment__userInfo__image.mr-2.float-left
-      - if comment.user.image.attached?
-        = image_tag comment.user.image
-      - else
-        = image_tag "no_image.png"
-    %ul.list-inline.p-comment__userInfo__upperLine
-      - if comment.post.user.id == comment.user.id
-        %li.list-inline-item.badge.badge-secondary
-          = comment.user.name
-      - else
+- comments.each do |comment|
+  .p-comment__item
+    .p-comment__userInfo
+      .p-comment__userInfo__image.mr-2.float-left
+        - if comment.user.image.attached?
+          = image_tag comment.user.image
+        - else
+          = image_tag "no_image.png"
+      %ul.list-inline.p-comment__userInfo__upperLine
+        - if comment.post.user.id == comment.user.id
+          %li.list-inline-item.badge.badge-secondary
+            = comment.user.name
+        - else
+          %li.list-inline-item
+            = comment.user.name
         %li.list-inline-item
-          = comment.user.name
-      %li.list-inline-item
-        = comment.created_at.to_s(:datetime_day_jp)
-      - if user_signed_in? && current_user.id == comment.user.id
-        %li.list-inline-item.float-right
-          = link_to icon("far", "times-circle"), comment, method: :delete, data: { confirm: 'コメントを削除してもよろしいですか？' }
+          = comment.created_at.to_s(:datetime_day_jp)
+        - if user_signed_in? && current_user.id == comment.user.id
+          %li.list-inline-item.float-right
+            = link_to icon("far", "times-circle"), comment, method: :delete, data: { confirm: 'コメントを削除してもよろしいですか？' }
 
-  .p-comment__text
-    = simple_format(comment.comment)
+    .p-comment__text
+      = simple_format(comment.comment)

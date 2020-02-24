@@ -10,7 +10,7 @@
         = render partial: 'comments/form', locals: { comment: @comment }
       .p-comment__list
         .p-comment__listTitle コメント
-        = render @comments
+        = render partial: 'comments/comment', locals: { comments: @comments }
 
     .col-md-4
       .card

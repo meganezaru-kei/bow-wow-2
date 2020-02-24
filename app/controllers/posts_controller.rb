@@ -46,7 +46,7 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new(post_id: @post.id)
-    @comments = @post.comments.includes(:user)
+    @comments = @post.comments.includes(user: { image_attachment: :blob } )
     @user_posts = Post.with_attached_images.order(created_at: :desc).where(user_id: @post.user.id).where.not(id: @post.id).limit(3)
     @new_posts = Post.with_attached_images.order(created_at: :desc).where.not(id: @post.id, user_id: @post.user.id).limit(3)
   end
@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   end
 
   def set_target_post
-    @post = Post.find(params[:id])
+    @post = Post.with_attached_images.find(params[:id])
   end
 
   def delete_images
