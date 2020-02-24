@@ -49,6 +49,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
   gem 'rails-flog', require: 'flog'
+  gem 'bullet'
 end
 
 group :development do
@@ -84,3 +85,4 @@ gem 'font-awesome-sass'
 gem 'jquery-rails'
 gem 'activestorage-validator'
 gem "aws-sdk-s3", require: false
+gem 'ransack'

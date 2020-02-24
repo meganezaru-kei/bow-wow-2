@@ -2,8 +2,14 @@ class PostsController < ApplicationController
   before_action :set_target_post, only: %i[show edit update destroy]
   
   def index
+    @q = Post.ransack(params[:q])
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
-    @posts = @posts.order(created_at: :desc).page(params[:page])
+    @posts = @posts.with_attached_images.order(created_at: :desc).page(params[:page])
+  end
+
+  def search
+    @q = Post.search(search_params)
+    @posts = @q.result.with_attached_images.order(created_at: :desc).page(params[:page])
   end
 
   def new
@@ -66,5 +72,9 @@ class PostsController < ApplicationController
       image = @post.images.find(image_id)
       image.purge
     end
+  end
+
+  def search_params
+    params.require(:q).permit(:title_cont)
   end
 end
