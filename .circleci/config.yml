@@ -68,6 +68,8 @@ jobs:
           fingerprints:
             - "9c:13:da:66:52:0a:8f:69:4e:f7:04:53:f3:eb:7a:a3"
 
+      - run: ssh ${USER_NAME}@${HOST_NAME} 'cd [/var/www/bow-wow-2] && git pull'
+
       - deploy:
           name: Capistrano deploy
           command: |
