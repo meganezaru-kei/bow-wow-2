@@ -61,3 +61,8 @@
 #   }
 
 server '18.176.39.233', user: 'ec2-user', roles: %w{app db web}
+
+set :ssh_options,
+    keys: %w[~/.ssh/BowWow.pem],
+    forward_agent: true,
+    auth_methods: %w[publickey]
