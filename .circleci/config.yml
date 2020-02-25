@@ -74,4 +74,7 @@ jobs:
             if [ "${CIRCLE_BRANCH}" != "master" ]; then
               exit 0
             fi
+            aws ec2 authorize-security-group-ingress --group-id $MYSECURITYGROUP --protocol tcp --port 22 --cidr $MYIP/32
             bundle exec cap production deploy --trace
+            aws ec2 revoke-security-group-ingress --group-id $MYSECURITYGROUP --protocol tcp --port 22 --cidr $MYIP/32
+
