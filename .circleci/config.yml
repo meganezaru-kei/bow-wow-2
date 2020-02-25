@@ -67,15 +67,6 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "9c:13:da:66:52:0a:8f:69:4e:f7:04:53:f3:eb:7a:a3"
-
-      - run:
-          name: Add ssh-agent
-          command: |
-            ssh-agent -s > ~/.ssh_agent_conf
-            source ~/.ssh_agent_conf
-            for _k in $(ls ${HOME}/.ssh/BowWow.pem); do
-              ssh-add ${_k} || true
-            done
             
       - deploy:
           name: Capistrano deploy
@@ -83,5 +74,4 @@ jobs:
             if [ "${CIRCLE_BRANCH}" != "master" ]; then
               exit 0
             fi
-            bundle exec cap production deploy --trace
-
+            bundle exec cap production deploy
