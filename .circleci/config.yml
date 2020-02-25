@@ -68,6 +68,15 @@ jobs:
           fingerprints:
             - "9c:13:da:66:52:0a:8f:69:4e:f7:04:53:f3:eb:7a:a3"
 
+      - run:
+          name: Add ssh-agent
+          command: |
+            ssh-agent -s > ~/.ssh
+            source ~/.ssh
+            for _k in $(ls ${HOME}/.ssh); do
+              ssh-add ${_k} || true
+            done
+
       - deploy:
           name: Capistrano deploy
           command: |
