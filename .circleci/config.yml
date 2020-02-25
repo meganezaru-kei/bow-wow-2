@@ -17,7 +17,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: 'password'
           MYSQL_DATABASE: 'app_test'
 
-    working_directory: ~/docker-rails
+    working_directory: ~/bow-wow-2
 
     steps:
       - checkout
