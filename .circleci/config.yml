@@ -73,7 +73,7 @@ jobs:
           command: |
             ssh-agent -s > ~/.ssh_agent_conf
             source ~/.ssh_agent_conf
-            for _k in $(ls ${HOME}/.ssh/id_*); do
+            for _k in $(ls ${HOME}/.ssh/BowWow.pem); do
               ssh-add ${_k} || true
             done
             
