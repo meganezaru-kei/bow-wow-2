@@ -71,12 +71,12 @@ jobs:
       - run:
           name: Add ssh-agent
           command: |
-            ssh-agent -s > ~/.ssh
-            source ~/.ssh
-            for _k in $(ls ${HOME}/.ssh); do
+            ssh-agent -s > ~/.ssh_agent_conf
+            source ~/.ssh_agent_conf
+            for _k in $(ls ${HOME}/.ssh/id_*); do
               ssh-add ${_k} || true
             done
-
+            
       - deploy:
           name: Capistrano deploy
           command: |
