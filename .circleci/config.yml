@@ -2,7 +2,6 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/ruby:2.5.1-node-browsers
         environment:
           RAILS_ENV: test
@@ -17,11 +16,6 @@ jobs:
           MYSQL_PASSWORD: ''
           MYSQL_ROOT_PASSWORD: 'password'
           MYSQL_DATABASE: 'app_test'
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
 
     working_directory: ~/docker-rails
 
@@ -39,6 +33,7 @@ jobs:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
+
       - save_cache:
           paths:
             - ./vendor/bundle
@@ -60,6 +55,7 @@ jobs:
                               --out test_results/rspec.xml \
                               --format progress \
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
       # collect reports
       - store_test_results:
           path: /tmp/test-results
@@ -74,7 +70,8 @@ jobs:
 
       - deploy:
           name: Capistrano deploy
-          command:
+          command: |
+            if [ "${CIRCLE_BRANCH}" != "master" ]; then
+              exit 0
+            fi
             bundle exec cap production deploy
-
-            
