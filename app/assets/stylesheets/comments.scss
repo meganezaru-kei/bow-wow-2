@@ -21,7 +21,7 @@
 }
 
 .p-comment__item {
-  padding: 18px;
+  padding: 18px 0;
   border-bottom: 2px dotted #dfdfdf;
 }
 
@@ -58,4 +58,5 @@
 .p-comment__text{
   padding-left: 64px;
   margin-top: -8px;
+  word-break: break-all;
 }
