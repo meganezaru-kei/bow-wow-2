@@ -60,7 +60,7 @@
 #     # password: "please use keys"
 #   }
 
-server '18.176.39.233', 
+server 'bow-wow-album.com', 
   user: 'ec2-user', 
   roles: %w{app db web},
   port: 22,
