@@ -67,6 +67,10 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "ab:c5:ee:09:f7:ca:3f:7f:20:85:af:f7:21:2a:05:ae"
+
+      - run:
+          name: cat ssh config
+          command: cat ~/.ssh/config
             
       - deploy:
           name: Capistrano deploy
