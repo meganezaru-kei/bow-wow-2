@@ -63,10 +63,9 @@
 server '18.176.39.233', 
   user: 'ec2-user', 
   roles: %w{app db web},
-  port: 22,
   ssh_options: {
-    user: 'ec2-user', 
     keys: ["#{ENV.fetch('PRODUCTION_SSH_KEY')}"], 
     forward_agent: true,
-    auth_methods: %w(publickey)
+    auth_methods: %w(publickey),
+    port: 22
   }
