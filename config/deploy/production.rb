@@ -66,7 +66,7 @@ server '18.176.39.233',
   port: 22,
   ssh_options: {
     user: 'ec2-user', 
-    keys: %w(~/.ssh/id_rsa),
+    keys: ["#{ENV.fetch('PRODUCTION_SSH_KEY')}"], 
     forward_agent: true,
     auth_methods: %w(publickey)
   }
