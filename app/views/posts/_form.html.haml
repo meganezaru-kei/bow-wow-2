@@ -26,8 +26,9 @@
     .col-md-4
       .form-group#category
         = f.label :parent_category, '犬種：'
-        = f.select :parent_category, @category_parent_array, {prompt: "---"}, {id: 'parent_category', class: 'form-control'} 
-        = f.select :child_category, options_for_select(@category_child_array.map{|c|[c[:name], c[:name], {'data-category' => c[:id]}]}, @post.child_category), {}, {id: 'child_category', class: "form-control mt-2"}
+        = f.select :parent_category, @category_parent_array, {}, { id: 'parent_category', class: 'form-control' } 
+        - if @category_child_array
+          = f.select :child_category, options_for_select(@category_child_array.map{ |c|[c[:name], c[:name], { data: { category: c[:id] } }] }, @post.child_category), {}, { id: 'child_category', class: "form-control mt-2" }
       .form-group
         = f.label :tag_ids, 'タグ：'
         = f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag|
