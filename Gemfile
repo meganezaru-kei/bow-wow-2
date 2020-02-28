@@ -93,3 +93,4 @@ gem 'activestorage-validator'
 gem "aws-sdk-s3", require: false
 gem 'ransack'
 gem 'ancestry'
+gem 'google-analytics-rails'

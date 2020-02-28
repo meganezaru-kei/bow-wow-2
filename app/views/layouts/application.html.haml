@@ -6,6 +6,7 @@
     = favicon_link_tag('bow-wow_favicon3.ico')
     = csrf_meta_tags
     = csp_meta_tag
+    = analytics_init if Rails.env.production?
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     %link{ href: "//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css", rel: "stylesheet", type: "text/css" }/
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
