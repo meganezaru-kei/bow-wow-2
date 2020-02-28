@@ -47,7 +47,7 @@ $(document).on('turbolinks:load', function() {
       reader.addEventListener("load", function(){
         var image_id = img_count + 1;
         displayPicture(image_id, reader.result);
-      },false);
+      }, false);
       
       if(picture_file){
         reader.readAsDataURL(picture_file);
@@ -81,4 +81,25 @@ $(document).on('turbolinks:load', function(){
       $(`#delete-btn-${i + 1}`).attr('id', `delete-btn-${i}`);
     };
   })
+})
+
+// ============================================
+// new画面およびedit画面に遷移したらリロード（バグ対策）
+// ============================================
+
+$(document).on('turbolinks:load', function(){
+  var path = location.pathname;
+  var array = path.split('/');
+  var id = array[2];
+  if (path.match("/posts/new")){
+    if (window.name != "new_post"){
+      location.reload();
+      window.name = "new_post";
+    }
+  } else if (path.match("/posts") && path.match("/edit")){
+    if (window.name != `edit_post_${id}`){
+      location.reload();
+      window.name = `edit_post_${id}`;
+    }
+  }
 })

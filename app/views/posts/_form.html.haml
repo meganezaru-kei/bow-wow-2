@@ -1,8 +1,5 @@
 = render 'shared/error_messages'
 
-.alert.alert-info
-  ※ 画像が複数枚同時にアップされる場合は、画面を一度リロードしてから再度お試しください。現在バグは修正中です。
-
 = form_for post do |f|
   .form-group#post-images-area
     = f.label :images, '画像（1枚〜6枚まで）：'
