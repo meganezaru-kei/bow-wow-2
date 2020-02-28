@@ -26,7 +26,7 @@ https://bow-wow-album.com/ <br>
 #### DB
 - MySQL 5.7
 
-#### インフラ等
+#### インフラ・開発環境等
 - Docker/docker-compose
 - AWS（VPC, EC2, S3, Route 53, ALB, ACM）
 - CircleCI（CI/CD)
@@ -35,9 +35,9 @@ https://bow-wow-album.com/ <br>
 
 # 実装機能
 - ユーザー機能
-  - 新規登録
-  - ログイン・ログアウト
-  - マイページ・登録情報編集
+  - deviseを使用
+  - 新規登録・ログイン・ログアウト機能
+  - マイページ・登録情報編集機能
 - 記事投稿機能
 - 画像投稿機能
   - active_storageを使用
