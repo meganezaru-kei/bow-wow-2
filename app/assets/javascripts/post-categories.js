@@ -99,7 +99,6 @@ $(document).on('turbolinks:load', function(){
 $(document).on('turbolinks:load', function(){
   $('#new_post').on('submit', function(e){
     var parent_category = $("#parent_category").val();
-    console.log(parent_category)
     var child_category = $("#child_category").val();
     if(parent_category == "---" || child_category == "---"){
       e.preventDefault();
@@ -119,7 +118,6 @@ $(document).on('turbolinks:load', function(){
 $(document).on('turbolinks:load', function(){
   $('.edit_post').on('submit', function(e){
     var parent_category = $("#parent_category").val();
-    console.log(parent_category)
     var child_category = $("#child_category").val();
     if(parent_category == "---" || child_category == "---"){
       e.preventDefault();
