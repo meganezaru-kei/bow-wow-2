@@ -26,6 +26,7 @@ class PostsController < ApplicationController
 
   def search
     @q = Post.search(search_params)
+    @posts_length = @q.result.length
     @posts = @q.result.with_attached_images.order(created_at: :desc).page(params[:page])
   end
 

@@ -10,7 +10,7 @@
 
   - if @posts.length == 0
     %h3.text-center.mt-5
-      まだそのイッヌはここにはいません(T_T)
+      そのイッヌはまだここにはいません(T_T)
   - else
     .row.post-list__items
       = render partial: 'posts', locals: { posts: @posts }

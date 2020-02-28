@@ -1,6 +1,6 @@
 .container.post-list
   %h1.text-center
-    = "検索結果：#{@posts.length}件"
+    = "検索結果：#{@posts_length}件"
   = render 'layouts/flashes'
   .row.post-list__items
     = render partial: 'posts', locals: { posts: @posts }
