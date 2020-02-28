@@ -5,7 +5,7 @@
     = search_form_for(@q, url: posts_path, id: "search_category") do |f|
       = f.select :parent_category_eq, @category_parent_array, {}, { id: 'search_parent_category', class: 'form-control post-list__select mb-2' }
       - if @q.child_category_eq
-        = f.select :child_category_eq, options_for_select(@category_child_array.map{|c|[c[:name], c[:name], {'data-category' => c[:id]}]}, @q.child_category_eq), {}, { id: 'search_child_category', class: 'form-control post-list__select', onchange: 'submit(this.form);' }
+        = f.select :child_category_eq, options_for_select(@category_child_array.map{|c|[c[:name], c[:name], {'data-category' => c[:id]}]}, @q.child_category_eq), {}, { id: 'search_child_category', class: 'form-control post-list__select mb-2', onchange: 'submit(this.form);' }
         = link_to 'reset', posts_path, class: "btn btn-outline-dark"
 
   - if @posts.length == 0
