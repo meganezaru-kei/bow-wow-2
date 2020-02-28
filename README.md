@@ -2,7 +2,7 @@
 犬の画像投稿アプリです。<br>
 日々の成長記録等をアップして、ペットとの思い出を記録できます。<br>
 レスポンシブ対応しているのでスマホからもご確認いただけます。
-[![Image from Gyazo](https://i.gyazo.com/31083579102addd50adb07029e744547.png)](https://gyazo.com/31083579102addd50adb07029e744547)
+[![Image from Gyazo](https://i.gyazo.com/0b9367be4894657df429f79ec8596094.png)](https://gyazo.com/0b9367be4894657df429f79ec8596094)
 
 # URL
 https://bow-wow-album.com/ <br>
