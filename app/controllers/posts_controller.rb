@@ -14,6 +14,11 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @images_count = @post.images.length.to_i
+
+    @category_parent_array = []
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent.name
+    end
   end
 
   def create
@@ -29,6 +34,17 @@ class PostsController < ApplicationController
 
   def edit
     @images_count = @post.images.length.to_i
+
+    @category_parent_array = ["---"]
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent.name
+    end
+
+    @category_child_array = [{id: "---", name: "---"}]
+    @parent = Category.find_by(name: @post.parent_category)
+    @parent.children.each do |child|
+      @category_child_array += [{id: child.id, name: child.name}]
+    end
   end
 
   def update
@@ -57,10 +73,20 @@ class PostsController < ApplicationController
     redirect_to posts_path, flash: { alert: "「#{@post.title}」を削除しました" }
   end
 
+  def get_category_children
+    @category_children = Category.find_by(name: "#{params[:parent_name]}", ancestry: nil).children
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, tag_ids: [], images: []).merge(user_id: current_user.id)
+    params.require(:post).permit(
+      :title, 
+      :body, 
+      :parent_category, 
+      :child_category, 
+      tag_ids: [], 
+      images: []).merge(user_id: current_user.id)
   end
 
   def set_target_post
