@@ -2,8 +2,26 @@ class PostsController < ApplicationController
   before_action :set_target_post, only: %i[show edit update destroy]
   
   def index
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
-    @posts = @posts.with_attached_images.order(created_at: :desc).page(params[:page])
+    @category_parent_array = ["犬種で絞り込み"]
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent.name
+    end
+
+    if @q.child_category_eq
+      @category_child_array = []
+      @parent = Category.find_by(name: @q.parent_category_eq)
+      @parent.children.each do |child|
+        @category_child_array += [{id: child.id, name: child.name}]
+      end
+    end
+
+    if params[:q]
+      @posts = Post.where(child_category: params[:q][:child_category_eq])
+      @posts = @posts.with_attached_images.order(created_at: :desc).page(params[:page])
+    else
+      @posts = Post.all
+      @posts = @posts.with_attached_images.order(created_at: :desc).page(params[:page])
+    end
   end
 
   def search
@@ -14,6 +32,11 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @images_count = @post.images.length.to_i
+
+    @category_parent_array = ["---"]
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent.name
+    end
   end
 
   def create
@@ -29,6 +52,19 @@ class PostsController < ApplicationController
 
   def edit
     @images_count = @post.images.length.to_i
+
+    @category_parent_array = ["---"]
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent.name
+    end
+
+    @category_child_array = [{id: "---", name: "---"}]
+    @parent = Category.find_by(name: @post.parent_category)
+    if @parent
+      @parent.children.each do |child|
+        @category_child_array += [{id: child.id, name: child.name}]
+      end
+    end
   end
 
   def update
@@ -57,10 +93,20 @@ class PostsController < ApplicationController
     redirect_to posts_path, flash: { alert: "「#{@post.title}」を削除しました" }
   end
 
+  def get_category_children
+    @category_children = Category.find_by(name: "#{params[:parent_name]}", ancestry: nil).children
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, tag_ids: [], images: []).merge(user_id: current_user.id)
+    params.require(:post).permit(
+      :title, 
+      :body, 
+      :parent_category, 
+      :child_category, 
+      tag_ids: [], 
+      images: []).merge(user_id: current_user.id)
   end
 
   def set_target_post

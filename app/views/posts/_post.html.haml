@@ -16,6 +16,10 @@
             = link_to '削除する', post_path, class: 'dropdown-item text-danger', method: :delete, data: { confirm: '本当に削除しますか？' }
     %h4
       = post.title
+    %span.badge.badge-info
+      = post.parent_category
+    %span.badge.badge-info
+      = post.child_category
     - post.tags.each do |tag|
       %span.badge.badge-info
         = tag.name

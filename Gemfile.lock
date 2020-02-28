@@ -55,6 +55,8 @@ GEM
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     anbt-sql-formatter (0.1.0)
+    ancestry (3.0.7)
+      activerecord (>= 3.2.0)
     annotate (3.0.3)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
@@ -369,6 +371,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-session_store
   activestorage-validator
+  ancestry
   annotate
   aws-sdk-s3
   bootsnap (>= 1.1.0)
