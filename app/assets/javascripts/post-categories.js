@@ -20,7 +20,7 @@ $(document).on('turbolinks:load', function(){
       var parentCategory = document.getElementById('parent_category').value; //選択された親カテゴリーの名前を取得
       if (parentCategory != "---"){ //親カテゴリーが初期値でないことを確認
         $.ajax({
-          url: '/posts/get_category_children',
+          url: '/posts/set_category_children',
           type: 'GET',
           data: { parent_name: parentCategory },
           dataType: 'json'
@@ -70,7 +70,7 @@ $(document).on('turbolinks:load', function(){
       var parentCategory = document.getElementById('search_parent_category').value; //選択された親カテゴリーの名前を取得
       if (parentCategory != "犬種で絞り込み"){ //親カテゴリーが初期値でないことを確認
         $.ajax({
-          url: '/posts/get_category_children',
+          url: '/posts/set_category_children',
           type: 'GET',
           data: { parent_name: parentCategory },
           dataType: 'json'

@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :blob, class: ActiveStorage::Blob do
-    sequence(:key) { SecureRandom.urlsafe_base64 }  # ユニークなキーでなければならない
+    sequence(:key) { SecureRandom.urlsafe_base64 } # ユニークなキーでなければならない
     filename { 'test_image.png' }
     content_type { 'image/png' }
     metadata { '' }
-    byte_size { 13317 }
+    byte_size { 13_317 }
     checksum { 'R-EvpP3cJEEQCSwQq/FRCF==' }
 
     after(:create) do |blob|
