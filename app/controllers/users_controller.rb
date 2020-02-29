@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_target_user
 
   def show
-    @posts = Post.with_attached_images.order(created_at: :desc).where(user_id: @user.id).page(params[:page])
+    @posts = Post.with_attached_images.recent.user(@user.id).page(params[:page])
   end
 
   def edit; end

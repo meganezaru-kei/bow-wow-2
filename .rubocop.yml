@@ -30,3 +30,6 @@ ClassAndModuleChildren:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Metrics/AbcSize:
+  Max: 20

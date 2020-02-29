@@ -3,26 +3,22 @@ class PostsController < ApplicationController
 
   def index
     @category_parent_array = ['犬種で絞り込み']
-    Category.where(ancestry: nil).each do |parent|
-      @category_parent_array << parent.name
-    end
+    Category.parent_name_set(@category_parent_array)
 
+    @category_child_array = []
     if @q.child_category_eq
-      @category_child_array = []
-      @parent = Category.find_by(name: @q.parent_category_eq)
-      @parent.children.each do |child|
-        @category_child_array += [{ id: child.id, name: child.name }]
-      end
+      @category_child_array = Category.child_name_set(@category_child_array, @q)
     end
 
-    @posts = params[:q].present? ? Post.where(child_category: params[:q][:child_category_eq]) : Post.all
-    @posts = @posts.with_attached_images.order(created_at: :desc).page(params[:page])
+    @params = params[:q][:child_category_eq] if params[:q]
+    @posts = params[:q].present? ? Post.category(@params) : Post.all
+    @posts = @posts.with_attached_images.recent.page(params[:page])
   end
 
   def search
     @q = Post.search(search_params)
     @posts_length = @q.result.length
-    @posts = @q.result.with_attached_images.order(created_at: :desc).page(params[:page])
+    @posts = @q.result.with_attached_images.recent.page(params[:page])
   end
 
   def new
@@ -75,8 +71,8 @@ class PostsController < ApplicationController
   def show
     @comment = Comment.new(post_id: @post.id)
     @comments = @post.comments.includes(user: { image_attachment: :blob })
-    @user_posts = Post.with_attached_images.order(created_at: :desc).where(user_id: @post.user.id).where.not(id: @post.id).limit(3)
-    @new_posts = Post.with_attached_images.order(created_at: :desc).where.not(id: @post.id, user_id: @post.user.id).limit(3)
+    @user_posts = Post.user_posts_search(@post.user.id, @post.id).limit(3)
+    @new_posts = Post.new_posts_search(@post.id, @post.user.id).limit(3)
   end
 
   def destroy
@@ -86,7 +82,10 @@ class PostsController < ApplicationController
   end
 
   def set_category_children
-    @category_children = Category.find_by(name: params[:parent_name].to_s, ancestry: nil).children
+    @category_children = Category.find_by(
+      name: params[:parent_name].to_s,
+      ancestry: nil
+    ).children
   end
 
   private
