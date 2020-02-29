@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   before_action :set_target_post, only: %i[show edit update destroy]
-  
+
   def index
-    @category_parent_array = ["犬種で絞り込み"]
+    @category_parent_array = ['犬種で絞り込み']
     Category.where(ancestry: nil).each do |parent|
       @category_parent_array << parent.name
     end
@@ -11,17 +11,12 @@ class PostsController < ApplicationController
       @category_child_array = []
       @parent = Category.find_by(name: @q.parent_category_eq)
       @parent.children.each do |child|
-        @category_child_array += [{id: child.id, name: child.name}]
+        @category_child_array += [{ id: child.id, name: child.name }]
       end
     end
 
-    if params[:q]
-      @posts = Post.where(child_category: params[:q][:child_category_eq])
-      @posts = @posts.with_attached_images.order(created_at: :desc).page(params[:page])
-    else
-      @posts = Post.all
-      @posts = @posts.with_attached_images.order(created_at: :desc).page(params[:page])
-    end
+    @posts = params[:q].present? ? Post.where(child_category: params[:q][:child_category_eq]) : Post.all
+    @posts = @posts.with_attached_images.order(created_at: :desc).page(params[:page])
   end
 
   def search
@@ -34,7 +29,7 @@ class PostsController < ApplicationController
     @post = Post.new
     @images_count = @post.images.length.to_i
 
-    @category_parent_array = ["---"]
+    @category_parent_array = ['---']
     Category.where(ancestry: nil).each do |parent|
       @category_parent_array << parent.name
     end
@@ -54,25 +49,21 @@ class PostsController < ApplicationController
   def edit
     @images_count = @post.images.length.to_i
 
-    @category_parent_array = ["---"]
+    @category_parent_array = ['---']
     Category.where(ancestry: nil).each do |parent|
       @category_parent_array << parent.name
     end
 
-    @category_child_array = [{id: "---", name: "---"}]
+    @category_child_array = [{ id: '---', name: '---' }]
     @parent = Category.find_by(name: @post.parent_category)
-    if @parent
-      @parent.children.each do |child|
-        @category_child_array += [{id: child.id, name: child.name}]
-      end
+    @parent&.children&.each do |child|
+      @category_child_array += [{ id: child.id, name: child.name }]
     end
   end
 
   def update
     if @post.update(post_params)
-      if params[:post][:images_blob_ids]
-        delete_images
-      end
+      delete_images if params[:post][:images_blob_ids]
       flash[:notice] = "「#{@post.title}」を更新しました"
       redirect_to @post
     else
@@ -83,7 +74,7 @@ class PostsController < ApplicationController
 
   def show
     @comment = Comment.new(post_id: @post.id)
-    @comments = @post.comments.includes(user: { image_attachment: :blob } )
+    @comments = @post.comments.includes(user: { image_attachment: :blob })
     @user_posts = Post.with_attached_images.order(created_at: :desc).where(user_id: @post.user.id).where.not(id: @post.id).limit(3)
     @new_posts = Post.with_attached_images.order(created_at: :desc).where.not(id: @post.id, user_id: @post.user.id).limit(3)
   end
@@ -94,20 +85,21 @@ class PostsController < ApplicationController
     redirect_to posts_path, flash: { alert: "「#{@post.title}」を削除しました" }
   end
 
-  def get_category_children
-    @category_children = Category.find_by(name: "#{params[:parent_name]}", ancestry: nil).children
+  def set_category_children
+    @category_children = Category.find_by(name: params[:parent_name].to_s, ancestry: nil).children
   end
 
   private
 
   def post_params
     params.require(:post).permit(
-      :title, 
-      :body, 
-      :parent_category, 
-      :child_category, 
-      tag_ids: [], 
-      images: []).merge(user_id: current_user.id)
+      :title,
+      :body,
+      :parent_category,
+      :child_category,
+      tag_ids: [],
+      images: []
+    ).merge(user_id: current_user.id)
   end
 
   def set_target_post
@@ -124,5 +116,4 @@ class PostsController < ApplicationController
   def search_params
     params.require(:q).permit(:title_cont)
   end
-
 end

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'search', to: 'posts#search'
   resources :posts do
     collection do
-      get  'get_category_children',      defaults: { format: 'json' }
+      get  'set_category_children',      defaults: { format: 'json' }
     end
   end
   resources :comments, only: %i[create destroy]

@@ -12,6 +12,11 @@ AllCops:
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
+    - 'spec/**'
+    - 'spec/**/*'
+    - 'spec/**/**/*'
+    - 'lib/**/*'
+    - 'test/**'
     - !ruby/regexp /old_and_unused\.rb$/
 
 AsciiComments:
