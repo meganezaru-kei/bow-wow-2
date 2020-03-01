@@ -92,3 +92,6 @@ gem 'jquery-rails'
 gem 'kaminari'
 gem 'rails-i18n'
 gem 'ransack'
+gem 'roboto'
+gem 'sitemap_generator'
+gem 'whenever', require: false

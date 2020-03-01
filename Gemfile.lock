@@ -123,6 +123,7 @@ GEM
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    chronic (0.10.2)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -291,6 +292,8 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.4)
+    roboto (1.0.1)
+      rails (>= 4.2)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
     rspec-expectations (3.9.0)
@@ -343,6 +346,8 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     sexp_processor (4.14.1)
+    sitemap_generator (6.1.0)
+      builder (~> 3.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -383,6 +388,8 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -426,11 +433,13 @@ DEPENDENCIES
   rails-flog
   rails-i18n
   ransack
+  roboto
   rspec-rails (~> 4.0.0.beta)
   rspec_junit_formatter
   rubocop-rails
   sass-rails (~> 5.0)
   selenium-webdriver
+  sitemap_generator
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
@@ -438,6 +447,7 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn (= 5.4.1)
   web-console (>= 3.3.0)
+  whenever
 
 RUBY VERSION
    ruby 2.5.1p57
