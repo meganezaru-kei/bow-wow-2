@@ -20,6 +20,8 @@ class Post < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :body, presence: true, length: { maximum: 1000 }
+  validates :parent_category, presence: true
+  validates :child_category, presence: true
 
   has_many_attached :images
   validates :images, presence: true, blob: {
