@@ -30,6 +30,7 @@ set :linked_files, fetch(:linked_files, []).push('config/master.key')
 
 # デプロイ処理が終わった後、Unicornを再起動するための記述
 after 'deploy:publishing', 'deploy:restart'
+after 'deploy:restart', 'deploy:sitemap'
 namespace :deploy do
   task :restart do
     invoke 'unicorn:restart'
@@ -44,4 +45,13 @@ namespace :deploy do
   end
   before :starting, 'deploy:upload'
   after :finishing, 'deploy:cleanup'
+
+  desc 'Generate sitemap'
+  task :sitemap do
+    on roles(:app) do
+      within release_path do
+        execute :bundle, :exec, :rake, 'sitemap:create RAILS_ENV=production'
+      end
+    end
+  end
 end
