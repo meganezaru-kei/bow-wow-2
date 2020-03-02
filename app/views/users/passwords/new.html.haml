@@ -1,3 +1,5 @@
+- content_for(:html_title) {'パスワードをお忘れの方 | BowWow!'}
+
 .container.user-form
   %h2 パスワードをお忘れの方
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|

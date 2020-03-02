@@ -1,3 +1,5 @@
+- content_for(:html_title) {'みんなの投稿 | BowWow!'}
+
 .container.post-list
   %h1.text-center.font-weight-bold みんなの投稿
   = render 'layouts/flashes'
@@ -20,6 +22,6 @@
 
 - if user_signed_in?
   .d-none.d-md-block
-    = link_to icon("fas", "plus-circle") + ' 新規投稿', new_post_path, class: 'new-post-btn--pc'
+    = link_to icon("fas", "plus-circle") + ' 新規投稿', new_post_path, class: 'new-post-btn--pc', id: 'new-post-btn'
   .d-block.d-md-none
     = link_to icon("fas", "plus"), new_post_path, class: 'new-post-btn--sp'

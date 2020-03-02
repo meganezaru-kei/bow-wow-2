@@ -1,3 +1,5 @@
+- content_for(:html_title) {"#{@post.title} | BowWow!"}
+
 .container.show-post
   - if flash[:notice]
     .alert.alert-primary
