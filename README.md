@@ -33,6 +33,9 @@ https://bow-wow-album.com/ <br>
 - Capistrano3
 - RSpec
 
+#### AWS構成図
+[![Image from Gyazo](https://i.gyazo.com/d589ba69eebf082b5ca05d36ef19b41e.png)](https://gyazo.com/d589ba69eebf082b5ca05d36ef19b41e)
+
 # 実装機能
 - ユーザー機能
   - deviseを使用
