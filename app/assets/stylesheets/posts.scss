@@ -91,10 +91,16 @@
 .show-post{
   min-height: calc(100vh - 186px);
   &__info{
-    font-size: 14px;
+    font-size: 13px;
     color: #666;
     a{
       color: #666;
+      text-decoration: none;
+    }
+    img{
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
     }
   }
   &__images--pc{

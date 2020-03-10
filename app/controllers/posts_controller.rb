@@ -25,10 +25,7 @@ class PostsController < ApplicationController
     @post = Post.new
     @images_count = @post.images.length.to_i
 
-    @category_parent_array = ['---']
-    Category.where(ancestry: nil).each do |parent|
-      @category_parent_array << parent.name
-    end
+    @category_parent_array = ['---', '大型犬', '中型犬', '小型犬']
   end
 
   def create
@@ -45,11 +42,7 @@ class PostsController < ApplicationController
   def edit
     @images_count = @post.images.length.to_i
 
-    @category_parent_array = ['---']
-    Category.where(ancestry: nil).each do |parent|
-      @category_parent_array << parent.name
-    end
-
+    @category_parent_array = ['---', '大型犬', '中型犬', '小型犬']
     @category_child_array = [{ id: '---', name: '---' }]
     @parent = Category.find_by(name: @post.parent_category)
     @parent&.children&.each do |child|
