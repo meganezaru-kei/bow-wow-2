@@ -49,7 +49,6 @@ group :development, :test do
   gem 'capistrano-rbenv'
   gem 'capistrano3-unicorn'
   gem 'capybara'
-  gem 'capybara-webkit'
   gem 'factory_bot_rails'
   gem 'headless'
   gem 'poltergeist'
