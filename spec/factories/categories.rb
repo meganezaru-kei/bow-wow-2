@@ -15,6 +15,7 @@
 
 FactoryBot.define do
   factory :category do
-    name { 'MyString' }
+    name { '大型犬' }
+    ancestry { nil }
   end
 end

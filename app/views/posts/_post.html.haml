@@ -2,12 +2,20 @@
   .card-header
     %ul.show-post__info.list-inline
       %li.list-inline-item
-        = icon("far", "edit")
-        = post.created_at.to_s(:datetime_day_jp)
-      %li.list-inline-item
         = link_to user_path(post.user.id) do
-          = icon("fas", "user")
-          = post.user.name + "さん"
+          - if post.user.image.attached?
+            = image_tag post.user.image, class: 'mr-1'
+          - else
+            = image_tag 'no_image.png', class: 'mr-1'
+          = post.user.name
+      - if post.created_at == post.updated_at
+        %li.list-inline-item
+          = icon("far", "clock")
+          = "#{post.created_at.to_s(:datetime_day_jp)}に投稿"
+      - else
+        %li.list-inline-item
+          = icon("far", "edit")
+          = "#{post.updated_at.to_s(:datetime_day_jp)}に更新"
       - if user_signed_in? && current_user.id == post.user.id
         %li.list-inline-item.float-right.dropdown
           %span{ role: "button", id: "dropdownMenu", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "true" } }= icon("fas", "ellipsis-h")

@@ -50,6 +50,8 @@ group :development, :test do
   gem 'capistrano3-unicorn'
   gem 'capybara'
   gem 'factory_bot_rails'
+  gem 'headless'
+  gem 'poltergeist'
   gem 'rails-controller-testing'
   gem 'rails-flog', require: 'flog'
   gem 'rspec-rails', '~> 4.0.0.beta'
@@ -68,6 +70,8 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   # gem 'capybara', '>= 2.15'
+  gem 'database_cleaner'
+  gem 'launchy'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
