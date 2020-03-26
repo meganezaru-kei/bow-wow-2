@@ -94,29 +94,10 @@ $(document).on('turbolinks:load', function(){
 });
 
 // ==================================================
-// 子カテゴリが選択されたいないときにアラートを出す（new）
-// ==================================================
-$(document).on('turbolinks:load', function(){
-  $('#new_post').on('submit', function(e){
-    var parent_category = $("#parent_category").val();
-    var child_category = $("#child_category").val();
-    if(parent_category == "---" || child_category == "---"){
-      e.preventDefault();
-      $.ajax({
-      }).done(function(){
-        alert('犬種を選択してください');
-        $('input[name="commit"]').prop('disabled', false);
-      }).fail(function(){
-        alert('ajax失敗');
-      })
-    }
-  })
-})
-// ==================================================
 // 子カテゴリが選択されたいないときにアラートを出す（edit）
 // ==================================================
 $(document).on('turbolinks:load', function(){
-  $('.edit_post').on('submit', function(e){
+  $('#posts_form').on('submit', function(e){
     var parent_category = $("#parent_category").val();
     var child_category = $("#child_category").val();
     if(parent_category == "---" || child_category == "---"){
