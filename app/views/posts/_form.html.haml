@@ -1,6 +1,6 @@
 = render 'shared/error_messages'
 
-= form_with model: post, local: true do |f|
+= form_with model: post, local: true, id: 'posts_form' do |f|
   .form-group#post-images-area
     = f.label :images, '画像（1枚〜6枚まで）：'
     = f.file_field :images, multiple: true, class: 'image-upload-btn', id: "post_images_#{@images_count + 1}"

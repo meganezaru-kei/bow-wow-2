@@ -103,3 +103,23 @@ $(document).on('turbolinks:load', function(){
     }
   }
 })
+
+// ==================================================
+// 画像枚数が０のときにアラートを出す（edit）
+// ==================================================
+$(document).on('turbolinks:load', function(){
+  $('#posts_form').on('submit', function(e){
+    var img_count = $('.image-box').length;
+    img_count = parseInt(img_count);
+    if(img_count == 0){
+      e.preventDefault();
+      $.ajax({
+      }).done(function(){
+        alert('画像を1枚以上選択してください');
+        $('input[name="commit"]').prop('disabled', false);
+      }).fail(function(){
+        alert('ajax失敗');
+      })
+    }
+  })
+})

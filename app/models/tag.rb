@@ -10,7 +10,7 @@
 
 class Tag < ApplicationRecord
   before_save :downcase_tag_name
-  
+
   has_many :post_tag_relations, dependent: :delete_all
   has_many :posts, through: :post_tag_relations
 
