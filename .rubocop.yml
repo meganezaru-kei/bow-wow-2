@@ -32,7 +32,7 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Metrics/AbcSize:
-  Max: 22
+  Max: 24
 
 Metrics/MethodLength:
   Max: 12
