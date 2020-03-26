@@ -4,6 +4,9 @@
   - if flash[:notice]
     .alert.alert-primary
       = flash[:notice]
+  - if flash[:alert]
+    .alert.alert-danger
+      = flash[:alert]
   .row
     .col-md-8
       = render @post

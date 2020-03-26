@@ -69,9 +69,12 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
-
-    redirect_to posts_path, flash: { alert: "「#{@post.title}」を削除しました" }
+    if @post.user.id == current_user.id
+      @post.destroy
+      redirect_to posts_path, flash: { alert: "「#{@post.title}」を削除しました" }
+    else
+      redirect_to posts_path, flash: { alert: "記事を削除できませんでした" }
+    end
   end
 
   def set_category_children
