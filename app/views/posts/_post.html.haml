@@ -30,7 +30,7 @@
       = post.child_category
     - post.tags.each do |tag|
       %span.badge.badge-info
-        = tag.name
+        = tag.tag_name
   .card-body
     %ul.slider-pc.d-none.d-md-block
       - if post.images.attached?

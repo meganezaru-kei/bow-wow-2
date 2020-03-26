@@ -40,4 +40,19 @@ class Post < ApplicationRecord
   def self.new_posts_search(post_id, post_user_id)
     with_attached_images.recent.where.not(id: post_id, user_id: post_user_id)
   end
+
+  def save_tags(tag_list)
+    tag_list.each do |tag|
+      find_tag = Tag.find_by(tag_name: tag.downcase)
+      if find_tag
+        PostTagRelation.create!(post_id: id, tag_id: find_tag.id)
+      else
+        begin
+          tags.create!(tag_name: tag)
+        rescue StandardError
+          nil
+        end
+      end
+    end
+  end
 end
