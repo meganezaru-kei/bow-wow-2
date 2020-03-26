@@ -1,6 +1,6 @@
 = render 'shared/error_messages'
 
-= form_for post do |f|
+= form_with model: post, local: true do |f|
   .form-group#post-images-area
     = f.label :images, '画像（1枚〜6枚まで）：'
     = f.file_field :images, multiple: true, class: 'image-upload-btn', id: "post_images_#{@images_count + 1}"
@@ -27,11 +27,10 @@
         - if @category_child_array
           = f.select :child_category, options_for_select(@category_child_array.map{ |c|[c[:name], c[:name], { data: { category: c[:id] } }] }, @post.child_category), {}, { id: 'child_category', class: "form-control mt-2" }
       .form-group
-        = f.label :tag_ids, 'タグ：'
-        = f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag|
-          .form-check
-            = tag.label class: 'form-check-label ml-3' do
-              = tag.check_box class: 'form-check-input'
-              = tag.text
+        = f.label :tag_names, 'タグ（カンマ区切り）：'
+        - if tags
+          = f.text_field :tag_names, class: 'form-control', value: tags.join(",")
+        - else
+          = f.text_field :tag_names, class: 'form-control'
 
   = f.submit '保存', class: 'btn btn-primary mt-3'

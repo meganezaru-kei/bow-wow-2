@@ -6,4 +6,4 @@
     .ml-auto.boards__linkBox
       = link_to '投稿一覧', root_path, class: 'btn btn-outline-dark'
 
-  = render partial: 'form', locals: { post: @post }
+  = render partial: 'form', locals: { post: @post, tags: @tags }
