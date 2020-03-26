@@ -1,5 +1,9 @@
 class PostsController < ApplicationController
   before_action :set_target_post, only: %i[show edit update destroy]
+  before_action :set_parent_category_array, only: %i[new edit create update]
+  before_action :set_child_category_array, only: %i[edit update]
+  before_action :set_images_count, only: %i[edit update]
+  before_action :set_tags, only: %i[edit]
 
   def index
     @category_parent_array = ['犬種で絞り込み']
@@ -23,9 +27,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @images_count = @post.images.length.to_i
-
-    @category_parent_array = ['---', '大型犬', '中型犬', '小型犬']
+    set_images_count
   end
 
   def create
@@ -36,26 +38,14 @@ class PostsController < ApplicationController
       flash[:notice] = "「#{@post.title}」を新規投稿しました"
       redirect_to @post
     else
-      @images_count = @post.images.length.to_i
+      set_child_category_array
+      set_images_count
+      @tags = tag_params[:tag_names].gsub(/[[:space:]]/, '').split(',').uniq
       render :new
     end
   end
 
-  def edit
-    @tags = []
-    @post.tags.each do |tag|
-      @tags << tag.tag_name
-    end
-
-    @images_count = @post.images.length.to_i
-
-    @category_parent_array = ['---', '大型犬', '中型犬', '小型犬']
-    @category_child_array = [{ id: '---', name: '---' }]
-    @parent = Category.find_by(name: @post.parent_category)
-    @parent&.children&.each do |child|
-      @category_child_array += [{ id: child.id, name: child.name }]
-    end
-  end
+  def edit; end
 
   def update
     if @post.update(post_params)
@@ -66,7 +56,7 @@ class PostsController < ApplicationController
       flash[:notice] = "「#{@post.title}」を更新しました"
       redirect_to @post
     else
-      @images_count = @post.images.length.to_i
+      @tags = tag_params[:tag_names].gsub(/[[:space:]]/, '').split(',').uniq
       render :edit
     end
   end
@@ -123,5 +113,31 @@ class PostsController < ApplicationController
 
   def tag_params
     params.require(:post).permit(:tag_names)
+  end
+
+  def set_parent_category_array
+    @category_parent_array = ['---']
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent.name
+    end
+  end
+
+  def set_child_category_array
+    @category_child_array = [{ id: '---', name: '---' }]
+    @parent = Category.find_by(name: @post.parent_category)
+    @parent&.children&.each do |child|
+      @category_child_array += [{ id: child.id, name: child.name }]
+    end
+  end
+
+  def set_images_count
+    @images_count = @post.images.length.to_i
+  end
+
+  def set_tags
+    @tags = []
+    @post.tags.each do |tag|
+      @tags << tag.tag_name
+    end
   end
 end

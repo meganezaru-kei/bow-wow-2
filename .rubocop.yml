@@ -32,4 +32,10 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Metrics/AbcSize:
-  Max: 20
+  Max: 22
+
+Metrics/MethodLength:
+  Max: 12
+
+Metrics/ClassLength:
+  Max: 120
