@@ -73,7 +73,7 @@ class PostsController < ApplicationController
       @post.destroy
       redirect_to posts_path, flash: { alert: "「#{@post.title}」を削除しました" }
     else
-      redirect_to posts_path, flash: { alert: "記事を削除できませんでした" }
+      redirect_to posts_path, flash: { alert: '記事を削除できませんでした' }
     end
   end
 

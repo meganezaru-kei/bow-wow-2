@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_target_comment, only: %i[destroy]
-  
+
   def create
     comment = Comment.new(comment_params)
     if comment.save
