@@ -31,6 +31,8 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
+      tag_list = tag_params[:tag_names].gsub(/[[:space:]]/, '').split(',').uniq
+      @post.save_tags(tag_list)
       flash[:notice] = "「#{@post.title}」を新規投稿しました"
       redirect_to @post
     else
@@ -40,6 +42,11 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @tags = []
+    @post.tags.each do |tag|
+      @tags << tag.tag_name
+    end
+
     @images_count = @post.images.length.to_i
 
     @category_parent_array = ['---', '大型犬', '中型犬', '小型犬']
@@ -52,6 +59,9 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
+      @post.tags.clear
+      tag_list = tag_params[:tag_names].gsub(/[[:space:]]/, '').split(',').uniq
+      @post.save_tags(tag_list)
       delete_images if params[:post][:images_blob_ids]
       flash[:notice] = "「#{@post.title}」を更新しました"
       redirect_to @post
@@ -92,7 +102,6 @@ class PostsController < ApplicationController
       :body,
       :parent_category,
       :child_category,
-      tag_ids: [],
       images: []
     ).merge(user_id: current_user.id)
   end
@@ -110,5 +119,9 @@ class PostsController < ApplicationController
 
   def search_params
     params.require(:q).permit(:title_cont)
+  end
+
+  def tag_params
+    params.require(:post).permit(:tag_names)
   end
 end
