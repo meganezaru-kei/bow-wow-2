@@ -86,7 +86,7 @@ gem 'activerecord-session_store'
 gem 'activestorage-validator'
 gem 'ancestry'
 gem 'aws-sdk-s3', require: false
-gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap', '~> 4.3.1'
 gem 'devise'
 gem 'erb2haml'
 gem 'font-awesome-sass'
